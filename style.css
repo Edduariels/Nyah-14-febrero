@@ -1,0 +1,1021 @@
+/* ========================================
+   VARIABLES Y RESETEO
+======================================== */
+
+:root {
+    /* Colores Doraemon */
+    --doraemon-blue: #0093DD;
+    --doraemon-red: #DD0031;
+    --doraemon-white: #FFFFFF;
+    --doraemon-yellow: #FFD700;
+    --soft-pink: #FFB6D9;
+    --light-blue: #E3F4FF;
+    --dark-blue: #006BA6;
+    
+    /* Fuentes */
+    --font-display: 'Pacifico', cursive;
+    --font-body: 'Quicksand', sans-serif;
+    
+    /* Espaciado */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+    
+    /* Sombras */
+    --shadow-soft: 0 4px 20px rgba(0, 147, 221, 0.15);
+    --shadow-medium: 0 8px 30px rgba(0, 147, 221, 0.25);
+    --shadow-strong: 0 12px 40px rgba(0, 147, 221, 0.35);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background: linear-gradient(135deg, #E3F4FF 0%, #FFFFFF 50%, #FFE8F0 100%);
+    color: #333;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* ========================================
+   ESTRELLAS DE FONDO ANIMADAS
+======================================== */
+
+.stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--doraemon-yellow);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--doraemon-yellow);
+    animation: twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.5); }
+}
+
+/* ========================================
+   CORAZONES FLOTANTES DE FONDO
+======================================== */
+
+.floating-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 20px;
+    opacity: 0;
+    animation: floatUp 10s infinite ease-in;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.7;
+    }
+    90% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ========================================
+   CONTENEDOR GENERAL
+======================================== */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    position: relative;
+    z-index: 10;
+}
+
+section {
+    position: relative;
+    z-index: 10;
+}
+
+/* ========================================
+   HERO BANNER
+======================================== */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: linear-gradient(180deg, 
+        rgba(0, 147, 221, 0.1) 0%, 
+        rgba(227, 244, 255, 0.5) 100%
+    );
+    padding: var(--spacing-lg) var(--spacing-md);
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(255, 182, 217, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(0, 147, 221, 0.2) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.hero-content {
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    animation: fadeInUp 1.2s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Doraemon Hero */
+.doraemon-hero {
+    position: relative;
+    display: inline-block;
+    margin-bottom: var(--spacing-md);
+    animation: floatDoraemon 4s infinite ease-in-out;
+}
+
+@keyframes floatDoraemon {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.doraemon-svg {
+    width: 200px;
+    height: 240px;
+    filter: drop-shadow(0 10px 30px rgba(0, 147, 221, 0.3));
+    transition: transform 0.3s ease;
+}
+
+.doraemon-svg:hover {
+    transform: scale(1.05) rotate(5deg);
+}
+
+.speech-bubble {
+    position: absolute;
+    top: -20px;
+    right: -100px;
+    background: white;
+    padding: 12px 20px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-medium);
+    font-weight: 600;
+    color: var(--doraemon-blue);
+    white-space: nowrap;
+    animation: popIn 0.6s ease-out 0.5s both;
+}
+
+.speech-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    left: -15px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 15px 15px 0 0;
+    border-color: white transparent transparent transparent;
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Títulos Hero */
+.hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    color: var(--doraemon-blue);
+    margin-bottom: var(--spacing-sm);
+    text-shadow: 3px 3px 0px rgba(255, 182, 217, 0.4);
+    animation: titleGlow 3s infinite alternate;
+}
+
+@keyframes titleGlow {
+    0% {
+        text-shadow: 
+            3px 3px 0px rgba(255, 182, 217, 0.4),
+            0 0 20px rgba(0, 147, 221, 0.3);
+    }
+    100% {
+        text-shadow: 
+            3px 3px 0px rgba(255, 182, 217, 0.6),
+            0 0 30px rgba(0, 147, 221, 0.6);
+    }
+}
+
+.name-highlight {
+    display: inline-block;
+    animation: bounce 2s infinite;
+}
+
+.name-highlight:first-child {
+    animation-delay: 0.1s;
+}
+
+.name-highlight:last-child {
+    animation-delay: 0.3s;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.heart-divider {
+    display: inline-block;
+    font-size: 0.8em;
+    animation: heartBeat 1.5s infinite;
+}
+
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    10%, 30% { transform: scale(1.2); }
+    20%, 40% { transform: scale(1); }
+}
+
+.hero-subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--soft-pink);
+    font-weight: 500;
+    margin-bottom: var(--spacing-lg);
+    opacity: 0;
+    animation: fadeIn 1s ease-out 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Banner Photo */
+.banner-photo {
+    margin-top: var(--spacing-md);
+    max-width: 600px;
+    opacity: 0;
+    animation: slideUp 1s ease-out 0.8s forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.banner-img {
+    width: 100%;
+    border-radius: 30px;
+    box-shadow: var(--shadow-strong);
+    border: 6px solid white;
+    transition: transform 0.4s ease;
+}
+
+.banner-img:hover {
+    transform: scale(1.05) rotate(-2deg);
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    color: var(--doraemon-blue);
+    animation: scrollBounce 2s infinite;
+}
+
+@keyframes scrollBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(10px); }
+}
+
+/* ========================================
+   SECCIÓN 14 DE FEBRERO
+======================================== */
+
+.february-section {
+    padding: var(--spacing-xl) 0;
+    background: linear-gradient(135deg, 
+        rgba(255, 182, 217, 0.2) 0%, 
+        rgba(227, 244, 255, 0.3) 100%
+    );
+    position: relative;
+    overflow: hidden;
+}
+
+.february-section::before {
+    content: '💙';
+    position: absolute;
+    font-size: 300px;
+    opacity: 0.05;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    pointer-events: none;
+}
+
+.february-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.date-badge {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    padding: var(--spacing-md);
+    border-radius: 20px;
+    box-shadow: var(--shadow-medium);
+    margin-bottom: var(--spacing-md);
+    border: 4px solid var(--doraemon-red);
+    animation: pulseScale 2s infinite ease-in-out;
+}
+
+@keyframes pulseScale {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.date-number {
+    font-family: var(--font-display);
+    font-size: 4rem;
+    color: var(--doraemon-red);
+    line-height: 1;
+}
+
+.date-month {
+    font-size: 1.5rem;
+    color: var(--doraemon-blue);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.february-text {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: var(--spacing-md);
+}
+
+.hearts-decoration {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.hearts-decoration .heart {
+    display: inline-block;
+    font-size: 2rem;
+    animation: heartPop 1.5s infinite ease-in-out;
+}
+
+.hearts-decoration .heart:nth-child(1) { animation-delay: 0s; }
+.hearts-decoration .heart:nth-child(2) { animation-delay: 0.2s; }
+.hearts-decoration .heart:nth-child(3) { animation-delay: 0.4s; }
+.hearts-decoration .heart:nth-child(4) { animation-delay: 0.6s; }
+.hearts-decoration .heart:nth-child(5) { animation-delay: 0.8s; }
+
+@keyframes heartPop {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+}
+
+/* ========================================
+   TÍTULOS DE SECCIÓN
+======================================== */
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--doraemon-blue);
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--soft-pink), 
+        var(--doraemon-blue), 
+        var(--soft-pink), 
+        transparent
+    );
+    border-radius: 2px;
+}
+
+/* ========================================
+   GALERÍA DE MOMENTOS
+======================================== */
+
+.gallery-section {
+    padding: var(--spacing-xl) 0;
+    position: relative;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.gallery-card {
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.gallery-card:hover {
+    transform: translateY(-10px) rotate(2deg);
+    box-shadow: var(--shadow-strong);
+}
+
+.card-image {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.gallery-card:hover .card-image img {
+    transform: scale(1.1);
+}
+
+.card-content {
+    padding: var(--spacing-md);
+    text-align: center;
+}
+
+.card-content h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--doraemon-blue);
+    margin-bottom: var(--spacing-xs);
+}
+
+.card-content p {
+    color: #666;
+    font-size: 1rem;
+}
+
+/* Doraemon Sticker */
+.doraemon-sticker {
+    position: absolute;
+    bottom: -50px;
+    right: 50px;
+    width: 120px;
+    height: 140px;
+    animation: wiggle 3s infinite ease-in-out;
+    z-index: 100;
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg); }
+    75% { transform: rotate(-5deg); }
+}
+
+.doraemon-sticker svg {
+    filter: drop-shadow(0 5px 15px rgba(0, 147, 221, 0.3));
+}
+
+/* ========================================
+   CARTA DORAEMON
+======================================== */
+
+.doraemon-letter {
+    padding: var(--spacing-xl) 0;
+    background: linear-gradient(135deg, 
+        rgba(0, 147, 221, 0.1) 0%, 
+        rgba(255, 255, 255, 0.5) 100%
+    );
+}
+
+.letter-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.doraemon-letter-character {
+    width: 180px;
+    animation: floatDoraemon 4s infinite ease-in-out;
+}
+
+.doraemon-letter-character svg {
+    filter: drop-shadow(0 10px 30px rgba(0, 147, 221, 0.3));
+}
+
+.comic-bubble {
+    flex: 1;
+    min-width: 300px;
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: 30px;
+    box-shadow: var(--shadow-medium);
+    position: relative;
+    border: 4px solid var(--doraemon-blue);
+}
+
+.comic-bubble::before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 20px 30px 20px 0;
+    border-color: transparent white transparent transparent;
+}
+
+.comic-bubble::after {
+    content: '';
+    position: absolute;
+    left: -38px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 23px 33px 23px 0;
+    border-color: transparent var(--doraemon-blue) transparent transparent;
+    z-index: -1;
+}
+
+.bubble-text {
+    font-size: 1.3rem;
+    line-height: 1.7;
+    color: #333;
+    font-style: italic;
+}
+
+/* ========================================
+   PLANES A FUTURO
+======================================== */
+
+.future-section {
+    padding: var(--spacing-xl) 0;
+    background: linear-gradient(135deg, 
+        rgba(255, 232, 240, 0.4) 0%, 
+        rgba(227, 244, 255, 0.4) 100%
+    );
+}
+
+.dreams-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.dream-item {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.4s ease;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUpItem 0.6s ease-out forwards;
+    animation-delay: var(--delay);
+}
+
+@keyframes fadeInUpItem {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dream-item:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: var(--shadow-strong);
+    background: linear-gradient(135deg, #FFFFFF 0%, #E3F4FF 100%);
+}
+
+.dream-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-sm);
+    display: inline-block;
+    animation: rotateIcon 3s infinite ease-in-out;
+}
+
+@keyframes rotateIcon {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(15deg); }
+}
+
+.dream-item h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--doraemon-blue);
+    margin-bottom: var(--spacing-xs);
+}
+
+.dream-item p {
+    color: #666;
+    font-size: 1rem;
+}
+
+/* ========================================
+   FINAL INTERACTIVO
+======================================== */
+
+.finale {
+    padding: var(--spacing-xl) 0;
+    background: linear-gradient(180deg, 
+        rgba(0, 147, 221, 0.05) 0%, 
+        rgba(255, 182, 217, 0.15) 100%
+    );
+    position: relative;
+    overflow: hidden;
+}
+
+.finale-content {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.doraemon-finale {
+    display: inline-block;
+    margin-bottom: var(--spacing-md);
+}
+
+.doraemon-bounce {
+    width: 160px;
+    height: 190px;
+    filter: drop-shadow(0 10px 30px rgba(0, 147, 221, 0.3));
+    animation: floatDoraemon 4s infinite ease-in-out;
+}
+
+.doraemon-bounce.celebrate {
+    animation: celebrateBounce 0.6s ease-out;
+}
+
+@keyframes celebrateBounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    25% { transform: translateY(-30px) scale(1.1); }
+    50% { transform: translateY(-15px) scale(1.05); }
+    75% { transform: translateY(-20px) scale(1.08); }
+}
+
+.finale-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--doraemon-blue);
+    margin-bottom: var(--spacing-md);
+}
+
+.finale-message {
+    font-size: 1.4rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Botón de Amor */
+.love-button {
+    background: linear-gradient(135deg, var(--doraemon-red) 0%, #FF1744 100%);
+    color: white;
+    border: none;
+    padding: 20px 60px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: var(--font-body);
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 
+        0 10px 30px rgba(221, 0, 49, 0.4),
+        inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.love-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.3), 
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.love-button:hover::before {
+    left: 100%;
+}
+
+.love-button:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 
+        0 15px 40px rgba(221, 0, 49, 0.5),
+        inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+}
+
+.love-button:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.button-text {
+    position: relative;
+    z-index: 1;
+}
+
+/* ========================================
+   EXPLOSIÓN DE CORAZONES
+======================================== */
+
+.hearts-explosion {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.explosion-heart {
+    position: absolute;
+    font-size: 30px;
+    animation: explode 2s ease-out forwards;
+}
+
+@keyframes explode {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(0);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(1) rotate(360deg);
+    }
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.footer {
+    background: var(--doraemon-blue);
+    color: white;
+    text-align: center;
+    padding: var(--spacing-md);
+    font-size: 1rem;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 768px) {
+    .speech-bubble {
+        position: static;
+        margin-top: var(--spacing-sm);
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .letter-content {
+        flex-direction: column;
+    }
+    
+    .comic-bubble::before,
+    .comic-bubble::after {
+        left: 50%;
+        transform: translateX(-50%);
+        top: -30px;
+        border-width: 0 20px 30px 20px;
+        border-color: transparent transparent white transparent;
+    }
+    
+    .comic-bubble::after {
+        top: -38px;
+        border-width: 0 23px 33px 23px;
+        border-color: transparent transparent var(--doraemon-blue) transparent;
+    }
+    
+    .doraemon-sticker {
+        bottom: -40px;
+        right: 20px;
+        width: 80px;
+        height: 100px;
+    }
+    
+    .dreams-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .doraemon-svg {
+        width: 150px;
+        height: 180px;
+    }
+    
+    .date-number {
+        font-size: 3rem;
+    }
+    
+    .date-month {
+        font-size: 1.2rem;
+    }
+    
+    .love-button {
+        padding: 15px 40px;
+        font-size: 1.2rem;
+    }
+}
+
+/* ========================================
+   ANIMACIONES DE ENTRADA
+======================================== */
+
+.fade-in {
+    animation: fadeIn 1s ease-out;
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.8s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.slide-in-right {
+    animation: slideInRight 0.8s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.gallery-card,
+.dream-item,
+.february-content,
+.letter-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#loveBtn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 20px;
+    background: #ff4d6d;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  
+  #loveBtn button:hover {
+    transform: scale(1.1);
+  }
