@@ -542,24 +542,54 @@ window.addEventListener('load', () => {
 
 const btn = document.getElementById("loveBtn");
 
-btn.addEventListener("click", () => {
-  for (let i = 0; i < 25; i++) {
-    let heart = document.createElement("div");
-    heart.innerHTML = "💖";
-    heart.style.position = "fixed";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.top = "100vh";
-    heart.style.fontSize = "2rem";
-    heart.style.animation = "floatUp 3s linear";
-    document.body.appendChild(heart);
+btn.addEventListener("click", (event) => {
+  const isMobile = window.innerWidth <= 768;
+  
+  if (isMobile) {
+    // MÓVIL: Desde abajo pero más rápido
+    for (let i = 0; i < 20; i++) {
+      let heart = document.createElement("div");
+      heart.innerHTML = "💖";
+      heart.style.position = "fixed";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.top = "100vh";
+      heart.style.fontSize = "1.8rem";
+      heart.style.pointerEvents = "none";
+      heart.style.zIndex = "9999";
+      heart.style.animation = "floatUpMobile 2s linear"; // Más rápido
+      document.body.appendChild(heart);
 
-    setTimeout(() => heart.remove(), 3000);
+      setTimeout(() => heart.remove(), 2000);
+    }
+  } else {
+    // DESKTOP: Animación original
+    for (let i = 0; i < 25; i++) {
+      let heart = document.createElement("div");
+      heart.innerHTML = "💖";
+      heart.style.position = "fixed";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.top = "100vh";
+      heart.style.fontSize = "2rem";
+      heart.style.pointerEvents = "none";
+      heart.style.zIndex = "9999";
+      heart.style.animation = "floatUp 3s linear";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 3000);
+    }
   }
 });
 
 const styleFloat = document.createElement("style");
 styleFloat.innerHTML = `
 @keyframes floatUp {
+  to {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
+}
+
+@keyframes floatUpMobile {
   to {
     transform: translateY(-120vh);
     opacity: 0;

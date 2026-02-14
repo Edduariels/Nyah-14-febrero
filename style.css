@@ -878,6 +878,53 @@ section {
     font-size: 1rem;
 }
 
+.finale-messages {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: var(--spacing-lg);
+    max-width: 700px;
+}
+
+.message-card {
+    background: white;
+    padding: 1.5rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 147, 221, 0.15);
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--doraemon-blue);
+}
+
+.message-card:hover {
+    transform: translateX(10px);
+    box-shadow: 0 8px 25px rgba(0, 147, 221, 0.25);
+}
+
+.message-card.highlight {
+    background: linear-gradient(135deg, #FFE8F0 0%, #E3F4FF 100%);
+    border-left: 4px solid var(--doraemon-red);
+    border: 3px solid var(--doraemon-red);
+}
+
+.card-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    animation: heartBeat 2s infinite;
+}
+
+.message-card p {
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.message-card.highlight p {
+    font-size: 1.2rem;
+    color: var(--doraemon-red);
+}
 /* ========================================
    RESPONSIVE
 ======================================== */
@@ -1007,15 +1054,71 @@ section {
 }
 
 #loveBtn {
-    padding: 15px 30px;
-    border: none;
-    border-radius: 20px;
-    background: #ff4d6d;
+    background: linear-gradient(135deg, var(--doraemon-red) 0%, #FF1744 100%);
     color: white;
-    font-size: 1.2rem;
+    border: none;
+    padding: 18px 50px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-family: var(--font-body);
+    border-radius: 50px;
     cursor: pointer;
-  }
-  
-  #loveBtn button:hover {
-    transform: scale(1.1);
-  }
+    box-shadow: 
+        0 10px 30px rgba(221, 0, 49, 0.4),
+        inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+}
+
+#loveBtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.3), 
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+#loveBtn:hover::before {
+    left: 100%;
+}
+
+#loveBtn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 
+        0 15px 40px rgba(221, 0, 49, 0.5),
+        inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+}
+
+#loveBtn:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+    #loveBtn {
+        padding: 15px 35px;
+        font-size: 1.1rem;
+        width: 90%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    #loveBtn {
+        padding: 12px 25px;
+        font-size: 1rem;
+        white-space: normal;
+        line-height: 1.4;
+        width: 85%;
+    }
+}
